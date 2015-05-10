@@ -6,10 +6,12 @@ import org.bower.registry.domain.Package;
 import org.bower.registry.repositories.PackageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,6 +30,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/packages")
+	@ResponseStatus(HttpStatus.CREATED)
 	public Package postPackage(@RequestBody Package _package) {
 		return packageRepository.save(_package);
 	}
@@ -44,6 +47,6 @@ public class ApiController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/packages/search/{name}")
 	public List<Package> searchPackages(@PathVariable String name) {
-	  return packageRepository.findByNameLike(name, new Sort("name"));
+	  return packageRepository.findByNameContaining(name, new Sort("name"));
 	}
 }

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +22,7 @@ public class Package {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable=false, updatable=false)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(nullable = false, unique = true)
@@ -37,15 +36,15 @@ public class Package {
 	@DateTimeFormat(style = "SS")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, name = "created_at")
-	private Date createdAt;
+	private Date createdAt = new Date();
 	
 	private int hits = 0;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,11 +66,6 @@ public class Package {
 
 	public Date getCreatedAt() {
 		return createdAt;
-	}
-
-	@PreUpdate
-	public void setCreatedAtDate() {
-		this.createdAt = new Date();
 	}
 
 	public int getHits() {

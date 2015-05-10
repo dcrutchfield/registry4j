@@ -7,7 +7,6 @@ public class PackageBuilder {
   
   public PackageBuilder() {
     this._package = new Package();
-    this._package.setCreatedAtDate();
   }
   
   public PackageBuilder id(long id) {

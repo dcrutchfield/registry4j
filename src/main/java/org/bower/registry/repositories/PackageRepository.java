@@ -7,7 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface PackageRepository extends PagingAndSortingRepository<Package, Long>{
-  List<Package> findByNameLike(String name, Sort order);
+  List<Package> findByNameContaining(String name, Sort order);
 	
 	Package findByName(String name);
 	
